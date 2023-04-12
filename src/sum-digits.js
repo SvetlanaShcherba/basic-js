@@ -14,16 +14,16 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function getSumOfDigits(n) {
   throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-  let nStr = String(n); 
+    let nStr = String(n); 
     let nArr=Array.from((nStr), Number);
-    let summ=0;    
+    let sum=0;    
     for (let i=0; i<nArr.length; i++) {
-        summ=summ+nArr[i];
+        sum=sum+nArr[i];
     }
-    if (summ>9)
-        summ=sumDigits(summ);
-  return summ;
+    if (sum>9) {
+      return getSumOfDigits(sum);
+    }     
+  return sum;
 }
 
 module.exports = {
