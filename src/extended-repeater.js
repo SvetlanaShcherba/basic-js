@@ -15,10 +15,42 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-function repeater(/* str, options */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+function repeater(str, options) {
+    // options.addition=options.addition||String(options.addition)||"";
+    // options.addition=options.addition||"";
+    options.addition= (options.addition !== undefined) ? `${options.addition}` : ""
+    options.separator =options.separator  || '+';
+    options.additionSeparator =options.additionSeparator || '|';
+    options.repeatTimes=options.repeatTimes || 1;
+    options.additionRepeatTimes=options.additionRepeatTimes || 1; 
+    if (typeof str !== 'string') {
+      str=String(str);
+    }   
+    if (options.repeatTimes==1) {
+      options.separator="";
+    }
+    if (options.additionRepeatTimes==1) {
+        options.additionSeparator="";
+    }
+    let strAdd='';
+    if (options.addition) {
+      strAdd=options.addition+options.additionSeparator;
+      if (options.additionRepeatTimes>1) {
+        strAdd=strAdd.repeat(options.additionRepeatTimes-1)+options.addition;
+      }  
+    }
+    else {
+      options.addition="";
+    }
+    
+    let newStr;
+    if (options.repeatTimes>1) {
+      newStr=(str+strAdd+options.separator).repeat(options.repeatTimes-1)+str+strAdd;
+    } else 
+      newStr=(str+strAdd+options.separator).repeat(options.repeatTimes);
+    return newStr;
+  }
+
 
 module.exports = {
   repeater
